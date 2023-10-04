@@ -4,8 +4,6 @@ import csv
 from pathlib import Path
 from sys import argv
 
-# Doesn't work on the firmware but work in the testing environment
-
 # python3 firmware.py /home/reverser/Desktop/Vlne/RV130X_FW_1.0.3.44.bin_extract/2097184-19591200.squashfs_v4_le_extract /home/reverser/Desktop/Vlne/RV130X_FW_1.0.3.45.bin_extract/2097184-19591200.squashfs_v4_le_extract
 
 
@@ -19,11 +17,11 @@ def get_files(path1, path2):
 	d = {}
 
 	for file in Path(path1).rglob('*'):
-		if file.is_file():
+		if file.is_file() and not file.is_symlink():
 			d[os.path.basename(file)] = [hash_files(file), None]
 
 	for  file in Path(path2).rglob('*'):
-		if file.is_file():
+		if file.is_file() and not file.is_symlink():
 			file_name = os.path.basename(file)
 			if file_name not in d:
 				d[file_name] = [None, hash_files(file)]
