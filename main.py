@@ -11,7 +11,7 @@ from sys import argv
 
 def get_files(path1, path2):
 	"""
-	This function receive a path to a directory and turn every files in it in a dictionary {name:hashfile}
+	This function the 2 path to the directory and turn every files in it in a dictionary {name:hashfile, hashfile}
 	:path1 (string): Absolute path to the directory of the first firmware
 	:path2 (string): Absolute path to the directory of the Second firmware
 	:return (dictionary): dict{fileName:[checksum1, checksum2]} 
@@ -34,7 +34,7 @@ def get_files(path1, path2):
 
 def hash_files(file_path):
 	"""
-	Open a file and turn it's content into binary
+	Open a file and turn it's content into binary the turn chunk of it into hash
 	:file_path (string): the path to the file to open
 	:return: the hash value of the open file
 	"""
