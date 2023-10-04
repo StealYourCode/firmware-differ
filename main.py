@@ -20,7 +20,7 @@ def get_files(path1, path2):
 		if file.is_file() and not file.is_symlink():
 			d[os.path.basename(file)] = [hash_files(file), None]
 
-	for  file in Path(path2).rglob('*'):
+	for file in Path(path2).rglob('*'):
 		if file.is_file() and not file.is_symlink():
 			file_name = os.path.basename(file)
 			if file_name not in d:
@@ -36,10 +36,11 @@ def hash_files(file_path):
 	:file_path (string): the path to the file to open
 	:return: the hash value of the open file
 	"""
-	with file_path.open("rb") as file:
-		bytes_files = file.read()
-		readable_hash = hashlib.md5(bytes_files).hexdigest()
-	return readable_hash
+	hash = hashlib.md5()
+	with open(file_path, "rb") as file:
+		while chunk := file.read(8192):
+			hash.update(chunk)
+	return hash.hexdigest()
 
 
 def save_in_file(dic):
