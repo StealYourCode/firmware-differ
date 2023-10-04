@@ -63,7 +63,7 @@ def save_in_file(dic):
 
 def comparaison(path1, path2):
 	"""
-	Compare the checksum of all the files from 2 firmwares, create a csv file to save the detected modification
+	Compare the checksum of all the files from 2 folders
 	:path1 (string): the absolute path to the first firmware
 	:path2 (string): the absolute path to the second firmware
 	"""
@@ -72,8 +72,6 @@ def comparaison(path1, path2):
 
 	for file_name in dic_check:
 		old_check, new_check = dic_check[file_name]
-		if dic_check[file_name] == "[[":
-			print(old_check, new_check)
 
 		if old_check == None:
 			change["Created"].append(file_name)
@@ -83,9 +81,6 @@ def comparaison(path1, path2):
 			change["Modified"].append(file_name)
 		else:
 			pass
-
-		if "[[" in file_name:
-			print(dic_check[file_name]) 
 
 	save_in_file(change)
 
