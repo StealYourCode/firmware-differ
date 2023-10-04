@@ -36,11 +36,10 @@ def hash_files(file_path):
 	:file_path (string): the path to the file to open
 	:return: the hash value of the open file
 	"""
-	hash = hashlib.md5()
-	with file_path.open("rb") as f:
-		while chunk := f.read(8192):
-			hash.update(chunk)
-	return hash.hexdigest()
+	with file_path.open("rb") as file:
+		bytes_files = file.read()
+		readable_hash = hashlib.md5(bytes_files).hexdigest()
+	return readable_hash
 
 
 def save_in_file(dic):
